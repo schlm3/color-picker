@@ -54,6 +54,11 @@ A material design color picker.
       },
       _colorpicker_clicked: function(){
         this.$.picker.click();
+        this.$.paperInput.inputElement.mousedown(
+          function(e){
+            this.$.paperInput.inputElement.blur();
+          }
+        );
       },
       _valueChanged: function(){
         this.value = this.$.picker.value;
