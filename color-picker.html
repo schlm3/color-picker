@@ -24,7 +24,7 @@ A material design color picker.
         height: 0.5em;
       }
     </style>
-    <div id="colorContainer" on-click="colorpicker_clicked">
+    <div id="colorContainer" on-click="_colorpicker_clicked">
       <paper-input id="paperInput" label="[[label]]" placeholder="[[placeholder]]" name="[[name]]" value="[[value]]" on-click="_colorpicker_clicked" readonly="[[readonly]]" required=[[required]] validator=[[validator]]></paper-input>
       <div id="colorDisplay"></div>
       <input id="picker" type="color" on-change="_valueChanged" hidden></input>
@@ -54,7 +54,6 @@ A material design color picker.
       },
       _colorpicker_clicked: function(){
         this.$.picker.click();
-        this.$.paperInput.inputElement.blur();
       },
       _valueChanged: function(){
         this.value = this.$.picker.value;
