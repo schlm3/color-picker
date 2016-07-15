@@ -1,0 +1,66 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<!--
+`color-picker`
+A material design color picker.
+
+@demo demo/index.html
+-->
+
+<dom-module id="color-picker">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #colorContainer {
+        position: relative;
+      }
+      #colorDisplay {
+        width:100%;
+        height: 0.5em;
+      }
+    </style>
+    <div id="colorContainer" on-click="colorpicker_clicked">
+      <paper-input id="paperInput" label="[[label]]" placeholder="[[placeholder]]" name="[[name]]" value="[[value]]" on-click="_colorpicker_clicked" readonly="[[readonly]]" required=[[required]] validator=[[validator]]></paper-input>
+      <div id="colorDisplay"></div>
+      <input id="picker" type="color" on-change="_valueChanged" hidden></input>
+      <paper-ripple></paper-ripple>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'color-picker',
+
+      behaviors: [
+        Polymer.IronFormElementBehavior,
+      ],
+
+      properties: {
+        value: {
+          type: String,
+          notify: true,
+        },
+        label: {
+          type: String,
+          notify: true,
+          value: 'color input',
+        },
+      },
+      _colorpicker_clicked: function(){
+        this.$.picker.click();
+        this.$.paperInput.inputElement.blur();
+      },
+      _valueChanged: function(){
+        this.value = this.$.picker.value;
+        this.$.colorDisplay.style["background-color"] = this.$.picker.value;
+        this.$.paperInput.inputElement.blur();
+      },
+    });
+  </script>
+</dom-module>
