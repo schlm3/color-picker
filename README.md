@@ -4,7 +4,7 @@ A material design color picker.
 
 ## Demo
 
-http://hartwin.localhost/polymer/color-picker/
+http://hartwin.hoyer.xyz/polymer/color-picker/
 
 ## Install the Polymer-CLI
 
