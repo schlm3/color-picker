@@ -2,6 +2,11 @@
   "name": "color-picker",
   "description": "A material design color picker.",
   "main": "color-picker.html",
+  "keywords": [
+    "input",
+    "color",
+    "web-components"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "paper-input": "PolymerElements/paper-input#^1.1.15"
