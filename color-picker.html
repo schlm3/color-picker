@@ -1,7 +1,7 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
-<link rel="import" href="../paper-ripple/paper-ripple.html">
-<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="./bower_components/polymer/polymer.html">
+<link rel="import" href="./bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="./bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="./bower_components/paper-input/paper-input.html">
 
 <!--
 `color-picker`
@@ -25,9 +25,9 @@ A material design color picker.
       }
     </style>
     <div id="colorContainer" on-click="_colorpicker_clicked">
-      <paper-input id="paperInput" label="[[label]]" placeholder="[[placeholder]]" name="[[name]]" value="[[value]]" on-click="_colorpicker_clicked" readonly="[[readonly]]" required=[[required]] validator=[[validator]]></paper-input>
+      <paper-input id="paperInput" label="[[label]]" placeholder="[[placeholder]]" name="[[name]]" value="[[value]]" on-change="_inputChanged" on-click="_colorpicker_clicked" readonly="[[readonly]]" required=[[required]] validator=[[validator]]></paper-input>
       <div id="colorDisplay"></div>
-      <input id="picker" type="color" on-change="_valueChanged" hidden></input>
+      <input id="picker" type="color" value="[[value]]" on-change="_valueChanged" hidden title="[[label]]" />
       <paper-ripple></paper-ripple>
     </div>
   </template>
@@ -45,6 +45,8 @@ A material design color picker.
         value: {
           type: String,
           notify: true,
+          value: "#7d7d7d",
+          observer: "_onValueChanged"
         },
         label: {
           type: String,
@@ -56,11 +58,16 @@ A material design color picker.
         this.$.picker.click();
         this.$.paperInput.inputElement.blur();
       },
+      _inputChanged: function(){
+        this.value = this.$.paperInput.value;
+      },
       _valueChanged: function(){
         this.value = this.$.picker.value;
+      },
+      _onValueChanged: function(newValue, oldValue){
         this.$.colorDisplay.style["background-color"] = this.$.picker.value;
         this.$.paperInput.inputElement.blur();
-      },
+      }
     });
   </script>
 </dom-module>
